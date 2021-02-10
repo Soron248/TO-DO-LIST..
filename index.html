@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST..</title>
+</head>
+
+<style>
+    body{
+        background-color: aliceblue;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    h1,h2{
+        color: orange;
+        margin-top: 50px;
+        border-bottom: 2px dotted black;
+    }
+    h3{
+        margin-top: 20px;
+        color: red;
+    }
+    .do{
+        margin-top: 20px;
+    }
+    .do textarea{
+        padding: 10px 10px;
+    }
+    .do input{
+        margin: 10px;
+        width: 100px;
+        height: 30px;
+    }
+    #add{
+        background-color: green;
+        color: white;
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+    #clear{
+        background-color: red;
+        color: white;
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+    .lst{
+        font-weight: bolder;
+        list-style-type: inherit;
+        width: 200px;
+        margin: 0 auto;
+    }
+    .bttn2{
+        border: none;
+        color: red;
+        margin-left: 50px;
+        font-weight: bolder;
+        background-color: white;
+    }
+</style>
+
+<body>
+    <h1>TO DO LIST...</h1>
+    <div class="do">
+        <textarea name="work" id="work" cols="50" rows="10" placeholder="Write here..."></textarea>
+        <input type="submit" value="ADD" id="add">
+        <input type="submit" value="CLEAR-LIST" id="clear">
+    </div>
+    <div class="result">
+        <h2>WORK LIST...</h2>
+        <ol id="show">
+            <h3 id="remove">No list added...</h3>        
+        </ol>
+    </div>
+
+    <script>
+        const work = document.getElementById("work");
+        const btn = document.getElementById("add");
+        const show = document.getElementById("show");
+        const txt = document.getElementById("remove");
+        const clear = document.getElementById("clear");
+        let nmbr = 1;
+        
+        clear.addEventListener('click',function(){
+            show.innerHTML = '';
+            txt.innerHTML = "No list added...";
+        })
+
+        btn.addEventListener('click',function(){
+            if(work.value == ''){
+                alert("Please write your note.");
+            }else{
+                txt.innerHTML = '';
+                const list = document.createElement("li");
+                const btn2 = document.createElement("button");
+                const btn2Value = document.createTextNode("X");
+                btn2.appendChild(btn2Value);
+                btn2.classList.add("bttn2");
+                show.appendChild(list);
+                list.innerHTML = work.value;
+                list.classList.add("lst");
+                work.value = '';
+                list.appendChild(btn2);
+
+                btn2.addEventListener('click',function(){
+                    show.removeChild(list);
+                })
+            }
+        })
+
+    </script>
+</body>
+</html>
